@@ -1,0 +1,6 @@
+The below steps outline to the process in order to collect all of the relevant data for this project across the various data sources.
+
+1 - Firstly the rail flow (station-to-station route) and fare data are obtained from the NRDP data portal, which is accessed via an API as described by nrdp_data_collection_instructions.
+2 - The station to lat/lon coordinate lookup is obtained by using the data provided in the following data repository: https://github.com/trainline-eu/stations.
+3
+3 - This data is then uploaded to a local SQLiteStudio database for analysis.

@@ -4,5 +4,6 @@ The below steps outline to the process in order to collect all of the relevant d
     - This data is converted into a csv format using the data_reader.py script.
 2 - The station to lat/lon coordinate lookup is obtained by using the data provided in the following data repository: https://github.com/trainline-eu/stations.
     - This data is processed using the data_reader_station_coords.py script.
-3 - This data is then uploaded to a local SQLiteStudio database for analysis. The import_data_fixes.sql script must be run in order to fix formatting issues when importing the data.
-4 - data_cleaning_code.sql must be run to remove duplicates from the fare table.
+3 - The station links data (data with distances between adjacent stations) is comma delimited, and can be imported into excel to save as a csv.
+4 - This data is then uploaded to a local SQLiteStudio database for analysis. The import_data_fixes.sql script must be run in order to fix formatting issues when importing the data.
+5 - data_cleaning_code.sql must be run to remove duplicates from the fare table.

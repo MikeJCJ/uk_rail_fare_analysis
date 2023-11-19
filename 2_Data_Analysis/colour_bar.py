@@ -2,6 +2,7 @@ import sqlite3
 import pathlib
 import pandas as pd
 import matplotlib.pyplot as plt
+import matplotlib as mpl
 from scipy import stats
 
 def Locate_Filepath(path:str)->pathlib.WindowsPath:
@@ -27,7 +28,16 @@ if __name__=="__main__":
     # Retrieve Data
     database_path = Locate_Filepath('2. Data\\Database\\nrdp_fare_data.db')
     flow_fare_loc_df = Database_To_Dataframe(database_path, "flow_fare_location", "FLOW_ID, POUND_PER_MILE")
-    # Create Histogram to determine bin sizes for colour bar
-    Plot_Histogram(flow_fare_loc_df["POUND_PER_MILE"], [0,0.85,1.2,1.7,2.6,20])
+    # Calculate quintiles
     bin_edges = stats.mstats.mquantiles(flow_fare_loc_df["POUND_PER_MILE"], [0.2, 0.4, 0.6, 0.8])
     print(bin_edges)
+    # Create Histogram to visualise quintiles
+    #####Plot_Histogram(flow_fare_loc_df["POUND_PER_MILE"], [0,0.85,1.2,1.7,2.6,20])
+    #Plot quintiles on scatter plot
+    fig, ax = plt.subplots(figsize=(6,1), layout='constrained')
+    cmap = mpl.cm.magma
+    bounds = [0,0.85,1.2,1.7,2.6,20]
+    norm = mpl.colors.BoundaryNorm(bounds, cmap.N)
+    fig.colorbar(mpl.cm.ScalarMappable(norm=norm, cmap=cmap),
+                cax=ax, orientation='vertical', spacing='uniform')
+    plt.show()

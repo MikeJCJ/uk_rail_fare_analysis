@@ -24,6 +24,13 @@ def Plot_Histogram(data:pd.Series, bins:list):
     plt.show()
     return
 
+def Show_Colourbar(bounds:list,cmap:mpl.colors.ListedColormap):
+    fig, ax = plt.subplots(figsize=(6,1), layout='constrained')
+    norm = mpl.colors.BoundaryNorm(bounds, cmap.N)
+    fig.colorbar(mpl.cm.ScalarMappable(norm=norm, cmap=cmap),
+                cax=ax, orientation='vertical', spacing='uniform')
+    plt.show()
+
 if __name__=="__main__":
     # Retrieve Data
     database_path = Locate_Filepath('2. Data\\Database\\nrdp_fare_data.db')
@@ -32,12 +39,6 @@ if __name__=="__main__":
     bin_edges = stats.mstats.mquantiles(flow_fare_loc_df["POUND_PER_MILE"], [0.2, 0.4, 0.6, 0.8])
     print(bin_edges)
     # Create Histogram to visualise quintiles
-    #####Plot_Histogram(flow_fare_loc_df["POUND_PER_MILE"], [0,0.85,1.2,1.7,2.6,20])
+    Plot_Histogram(flow_fare_loc_df["POUND_PER_MILE"], [0,0.85,1.2,1.7,2.6,20])
     #Plot quintiles on scatter plot
-    fig, ax = plt.subplots(figsize=(6,1), layout='constrained')
-    cmap = mpl.cm.magma
-    bounds = [0,0.85,1.2,1.7,2.6,20]
-    norm = mpl.colors.BoundaryNorm(bounds, cmap.N)
-    fig.colorbar(mpl.cm.ScalarMappable(norm=norm, cmap=cmap),
-                cax=ax, orientation='vertical', spacing='uniform')
-    plt.show()
+    Show_Colourbar([0,0.85,1.2,1.7,2.6,20], mpl.cm.magma)

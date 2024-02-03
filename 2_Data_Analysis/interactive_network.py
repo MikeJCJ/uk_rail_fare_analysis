@@ -56,10 +56,31 @@ def create_graph(network_df:pd.DataFrame):
     for i in range(len(routes)):
         G.add_edge(stations[routes[i][0]],stations[routes[i][1]],weight=routes[i][2])
     pos = {value:value for key, value in stations.items()} # Creates nodes in graph
-    return G
+    return G,pos
+
+def viz_setup(G,pos):
+    # Colourbar settings
+    cmap=mpl.cm.magma
+    fig, (ax1,ax2) = plt.subplots(1,2)
+    edges, weights = zip(*nx.get_edge_attributes(G,'weight').items())
+    edges = nx.draw_networkx_edges(G, pos=pos, width=2, alpha=0.6, edge_color=weights, edge_cmap=cmap)
+    #TODO: since I added colour bar, network map is not showing
+
+    #Colour Bar
+    norm = mpl.colors.BoundaryNorm([0,0.85,1.2,1.7,2.6,20], cmap.N)
+    fig.colorbar(mpl.cm.ScalarMappable(norm=norm, cmap=cmap), cax=ax2, orientation='vertical', spacing='uniform')
+    return ax1, ax2, edges
 
 if __name__ == "__main__":
     flow_fare_loc_database_path, transformer = setup()
     flow_fare_loc_df =read_data(flow_fare_loc_database_path)
     network_df = transform_data(flow_fare_loc_df, transformer)
-    G = create_graph(network_df)
+    G,pos = create_graph(network_df)
+    ax1, ax2, edges = viz_setup(G,pos)
+
+    plt.axis("on")
+    ax1.set_xlim(-800000,300000)
+    ax1.set_ylim(4700000,5700000)
+    #plt.colorbar(edges, ax=ax1)
+    
+    plt.show()

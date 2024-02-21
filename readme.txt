@@ -2,7 +2,7 @@
 Rail Network Analysis #
 #######################
 
-Key Skills: Clustering Algorithms | Visualising Networks | Database Creation | APIs 
+Key Skills: Visualising Networks | Database Creation | APIs 
 
 -----------
 - Process -
@@ -25,4 +25,3 @@ Stage 2 - Data Warehouse Creation
 Stage 3 - Analysis
 		- exploratory analysis of the data in order to determine best visualisations.
 		- Route cost view mapped using networkx library with matplotlib.
-		- Clustering Analysis of routes

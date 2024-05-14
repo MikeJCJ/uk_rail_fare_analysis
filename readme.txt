@@ -1,12 +1,10 @@
-#######################
-Rail Network Analysis #
-#######################
+-------------------------
+# Rail Network Analysis #
+-------------------------
 
 Key Skills: Visualising Networks | Database Creation | APIs 
 
------------
 - Process -
------------
 
 UK Rail Analysis Project which consists of these main stages:
     1 - Data Collection through the National Rail Data Portal (NRDP) API, and other sources.
